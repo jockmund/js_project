@@ -5,7 +5,7 @@ class Budget {
         // daysCount - количество дней на которое рассчитывается бюджет
         this.amount = amount
         this.daysCount = daysCount
-        this.startDate = Date.now()
+        this.startDate = new Date()
     }
 
     get perDay() {
@@ -35,7 +35,7 @@ class Record {
     constructor(amount) {
         // amount - сумма траты
         this.amount = amount
-        this.dateTime = Date.now()
+        this.dateTime = new Date()
     }
 }
 
@@ -64,7 +64,8 @@ const history = new History()
 
 const daily = new DailyAmount(budget, history)
 
+history.addRecord(new Record(100))
 
-history.addRecord(10)
+const qwe = daily.valueOf
 
 const asd = 0
