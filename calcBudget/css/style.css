@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+.nums {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.nums:last-child {
+    display: flex;
+    flex-grow: 1;
+}
+
+.btn-edits {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-enter {
+    align-items: stretch;
+}
+
+.btn-number {
+    width: 30px;
+    border-color: black;
+    background-color: lightgray;
+}
+
+.btn-back {
+    background-color: white;
+}
+
+.btn-enter {
+    background-color: #f3c161;
+}
