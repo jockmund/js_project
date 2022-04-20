@@ -147,6 +147,9 @@ header h1 {
 .todo-item.editing .textfield {
     display: block;
 }
+.todo-item.editing button {
+    display: none;
+}
 
 .todo-item button {
     opacity: 0;

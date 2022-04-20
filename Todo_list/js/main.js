@@ -10,8 +10,6 @@ function createNode(nodeType, classList, textContent, type) {
     return node
 }
 
-
-
 function createTodoItem(title) {
     const todoItem = document.createElement('li')
     todoItem.classList = ["todo-item"]
@@ -33,13 +31,28 @@ function createTodoItem(title) {
     todoItem.appendChild(btnEdit)
     todoItem.appendChild(btnDel)
 
+    bindEvents(todoItem)
+
     return todoItem
+}
+
+function bindEvents(todoItem) {
+    const checkbox = todoItem.querySelector('.checkbox')
+    const editButton = todoItem.querySelector('button.edit')
+    const deleteButton = todoItem.querySelector('button.delete')
+
+    checkbox.addEventListener('change,', checkTodoState)
+    editButton.addEventListener('click', editTodoItem)
+    deleteButton.addEventListener('click', deleteTodoItem)
 }
 
 function addEventListener(node, type, fn) {
     node.addEventListener(type, fn)
 }
 
+function removeEventListener(node, type, fn) {
+    node.removeEventListener(type, fn)
+}
 function addTodoItem(event) {
     event.preventDefault();
 
@@ -48,9 +61,6 @@ function addTodoItem(event) {
     }
 
     const todoItem = createTodoItem(addInput.value)
-
-    addEventListener(todoItem.querySelector('input[type=checkbox]'), 'change', checkTodoState)
-    addEventListener(todoItem.querySelector('.delete'), 'click', deleteTodoItem)
 
     todoList.appendChild(todoItem)
 
@@ -61,29 +71,50 @@ function checkTodoState(event) {
     const currTodoCheck = event.target
     const todoItem = currTodoCheck.parentNode
 
-    if (currTodoCheck.checked) {
-        todoItem.classList.add('completed')
-    } else {
-        todoItem.classList.remove('completed')
-    }
+    todoItem.classList.toggle('completed')
 }
 
 function deleteTodoItem(event) {
-    const currBtn = event.target
-    const todoItem = currBtn.parentNode
+    const delBtn = event.target
+    const todoItem = delBtn.parentNode
 
     todoList.removeChild(todoItem)
 }
 
 function editTodoItem(event) {
-    const currBtn = event.target
-    const todoItem = currBtn.parentNode
+    const editBtn = event.target
+    const todoItem = editBtn.parentNode
 
-    const todoTextField = todoItem.querySelector('input[type=text]')
+    todoItem.classList.add('editing')
 
-    console.log(todoTextField.data)
+    const todoTextField = todoItem.querySelector('.textfield')
+    const todoTitle = todoItem.querySelector('.title')
 
-    todoTextField.focus()
+    todoTextField.value = todoTitle.textContent
+
+    addEventListener(todoTextField, 'keydown', changeTodoTitle)
+}
+
+function changeTodoTitle(event) {
+    const todoTextField = event.target
+    const todoItem = todoTextField.parentNode
+
+    if (event.key === "Escape") {
+        todoItem.classList.remove('editing')
+        removeEventListener(todoTextField, 'keydown', changeTodoTitle)
+        return
+    }
+    if (event.key === "Enter") {
+        if (!todoTextField.value) {
+            alert('Название задачи не введено!')
+            return
+        }
+        const todoTitle = todoItem.querySelector('.title')
+        todoTitle.textContent = todoTextField.value
+
+        todoItem.classList.remove('editing')
+        removeEventListener(todoTextField, 'keydown', changeTodoTitle)
+    }
 }
 
 const todoForm= document.getElementById('todo-form');
