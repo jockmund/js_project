@@ -1,0 +1,18 @@
+{
+  "name": "todolist-oopstyle",
+  "version": "1.0.0",
+  "description": "Todo list project on js OOP",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "build": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
