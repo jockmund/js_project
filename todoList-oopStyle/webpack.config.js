@@ -1,17 +1,19 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
     entry: './src/index.js',
 
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, './public'),
         filename: 'app.js',
         publicPath: '/js',
     },
 
+    mode: 'development',
+
     devServer: {
-        contentBase: path.join(__dirname, 'public'),
+        static: path.join(__dirname, './public'),
     },
 
-    devtool: 'cheap-eval-source-map',
+    devtool: 'eval-cheap-source-map',
 }
