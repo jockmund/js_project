@@ -1,7 +1,13 @@
-class Model {
-    constructor(state = []) {
-        this.state = state;
+import {EventEmitter} from "./helpers";
 
+class Model extends EventEmitter{
+    constructor(state = []) {
+        super()
+        this.state = state;
+    }
+
+    getAllItems() {
+        return this.state
     }
 
     getItem(id) {
@@ -12,7 +18,8 @@ class Model {
     addItem(item) {
         // item - todo item
         this.state.push(item)
-        return this.state.findIndex(el => el === item)
+        this.emit('change', this.state)
+        return item
     }
 
     updateItem(id, data) {
@@ -20,6 +27,9 @@ class Model {
         const item = this.getItem(id)
 
         Object.keys(data).forEach(prop => item[prop] = data[prop])
+
+        this.emit('change', this.state)
+        return item
     }
 
     removeItem(id) {
@@ -28,6 +38,8 @@ class Model {
 
         if (index > -1)
             this.state.splice(index, 1)
+
+        this.emit('change', this.state)
     }
 }
 
