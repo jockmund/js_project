@@ -1,0 +1,84 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #282826;
+    color: white;
+    font-family: "Fira Sans", sans-serif;
+    width: 20rem;
+    height: 30rem;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.input-label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.history {
+    margin-right: 1rem;
+}
+
+.inp {
+    text-align: right;
+    background-color: #282826;
+    color: white;
+    border: none;
+    outline:none;
+    cursor: default;
+}
+
+.input-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 10;
+}
+
+.nums {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.row {
+    display: flex;
+    flex: 1;
+}
+
+.btn-edits {
+    display: flex;
+    flex-grow: 0.3;
+    flex-direction: column;
+}
+
+.btn-number {
+    border-color: black;
+    background-color: #efefef;
+    flex: 1;
+}
+
+.btn-back {
+    background-color: lightgray;
+    flex-grow: 0.28;
+}
+
+.btn-enter {
+    background-color: #f3c161;
+    flex-grow: 1;
+}
+
+.row.zero {
+    flex-grow: 1;
+}
+.row.comma {
+    flex-grow: 3;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
