@@ -21,17 +21,17 @@ function createNode(nodeType, props, ...children) {
     return node
 }
 
-function load(dateName) {
-    const stringData = localStorage.getItem(dateName)
+function load(dataName) {
+    const stringData = localStorage.getItem(dataName)
     const data = JSON.parse(stringData)
 
     return data
 }
 
-function save(dataName, data) {
-    const stringData = JSON.stringify(data)
+function save(args) {
+    const stringData = JSON.stringify(args.data)
 
-    localStorage.setItem(dataName, stringData)
+    localStorage.setItem(args.dataName, stringData)
 }
 
 function isToday(dateTime) {

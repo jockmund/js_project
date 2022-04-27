@@ -8,13 +8,16 @@ class ContMainPage extends EventEmitter{
         this.model = model
         this.view = view
 
-        this.view.on('add', this.addRecord.bind(this))
+        this.view.on('add', this.changeBudget.bind(this))
+        this.model.on('giveDailyAmount', this.showToday.bind(this))
     }
 
-    addRecord(amount) {
-        this.view.addToToday(amount)
+    changeBudget(amount) {
+        this.model.addRecord(+amount)
+    }
 
-        this.model.addRecord(amount)
+    showToday(dailyAmount) {
+        this.view.showToday(dailyAmount)
     }
 }
 

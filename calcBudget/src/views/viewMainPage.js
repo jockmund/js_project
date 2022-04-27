@@ -1,15 +1,18 @@
 import { createNode, EventEmitter } from "../model/helpers"
 
-class viewMainPage extends EventEmitter{
+class ViewMainPage extends EventEmitter{
     constructor() {
         super()
 
-        this.container = this.render()
+        this.container = document.getElementById('app')
+        this.render()
 
-        this.ButtonsEventListener()
+        this.buttonsEventListener()
     }
 
     render() {
+        // this.container.removeChild(this.container.lastChild)
+
         const btn7 = createNode('button', { className: 'btn-number' }, '7')
         const btn8 = createNode('button', { className: 'btn-number' }, '8')
         const btn9 = createNode('button', { className: 'btn-number' }, '9')
@@ -46,26 +49,27 @@ class viewMainPage extends EventEmitter{
         const inputArea = createNode('div', { className: 'input-area' }, inputLabel, inputButtons)
 
         const line = createNode('hr')
-        const today = createNode('div', { className: 'today' }, line, '0')
+        const labelToday = createNode('label', { className: 'inp', id: 'label-today' }, '0')
+        const today = createNode('div', { className: 'today' }, labelToday, line)
 
-        const container = document.getElementById('app')
-        container.append(today, inputArea)
-
-        return container
+        this.container.append(today, inputArea)
     }
 
-    ButtonsEventListener() {
+    buttonsEventListener() {
         const buttons = this.container.querySelectorAll('.btn-number')
         const input = this.container.querySelector('#input-number')
 
         buttons.forEach(btn => {
             btn.addEventListener('click', () => {
                 if (btn.textContent === ',') {
-                    if (input.value.includes(btn.textContent))
+                    if (input.value.includes('.'))
                         return
 
                     if (input.value.length === 0)
                         input.value += 0
+
+                    input.value += '.'
+                    return;
                 }
                 input.value += btn.textContent
             })
@@ -82,20 +86,16 @@ class viewMainPage extends EventEmitter{
         btnEnter.addEventListener('click', () => {
             this.emit('add', input.value)
 
-
             input.value = ''
         })
     }
 
-    addToToday(amount) {
-        const labelToday = this.container.querySelector('.today')
+    showToday(amount) {
+        const labelToday = this.container.querySelector('#label-today')
 
-        if (labelToday.textContent === "0")
-            labelToday.textContent = amount
-        else
-            labelToday.textContent = +labelToday.textContent + +amount
+        labelToday.textContent = amount + '\nНа сегодня'
     }
 
 }
 
-export default viewMainPage
+export default ViewMainPage

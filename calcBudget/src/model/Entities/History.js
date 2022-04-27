@@ -4,12 +4,17 @@ import {isToday} from "../helpers";
 class History {
     constructor(records = []) {
         // records список трат
-        this.records = []
+        this.records = records
     }
 
     // Добавление траты в историю
     addRecord(record) {
         this.records.push(record)
+    }
+
+    // Удаление траты из истории
+    deleteRecord(idRecord) {
+        this.records = this.records.filter(record => record.id != idRecord)
     }
 
     get history() {
