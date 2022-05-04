@@ -8,33 +8,31 @@ const main = (() => {
             }
         }
 
-        if (children.length > 0) {
-            children.forEach(child => {
-                if (typeof child === "string") {
-                    child = document.createTextNode(child)
-                }
+        children.forEach(child => {
+            if (typeof child === "string") {
+                child = document.createTextNode(child)
+            }
 
-                node.appendChild(child)
-            })
-        }
+            node.appendChild(child)
+        })
 
         return node
     }
 
     function createTodoItem(title) {
         // Дочерние элементы todoItem
-        const checkbox = createNode('input', { className: 'checkbox', type: 'checkbox' })
+        const checkbox = createNode('input', {className: 'checkbox', type: 'checkbox'})
 
-        const label = createNode('label', { className: 'title' }, title)
+        const label = createNode('label', {className: 'title'}, title)
 
-        const input = createNode('input', { className: 'textfield', type: 'text' })
+        const input = createNode('input', {className: 'textfield', type: 'text'})
 
-        const btnEdit = createNode('button', { className: 'edit' }, 'Изменить')
+        const btnEdit = createNode('button', {className: 'edit'}, 'Изменить')
 
-        const btnDel = createNode('button', { className: 'delete' }, 'Удалить')
+        const btnDel = createNode('button', {className: 'delete'}, 'Удалить')
 
         //Сам todoItem
-        const todoItem = createNode('li', { className: 'todo-item' }, checkbox, label, input, btnEdit, btnDel)
+        const todoItem = createNode('li', {className: 'todo-item'}, checkbox, label, input, btnEdit, btnDel)
 
         bindEvents(todoItem)
 
@@ -97,7 +95,7 @@ const main = (() => {
         todoItem.classList.toggle('editing')
     }
 
-    const todoForm= document.getElementById('todo-form');
+    const todoForm = document.getElementById('todo-form');
     const addInput = document.getElementById('add-input');
     const todoList = document.getElementById('todo-list');
     const todoItems = document.querySelectorAll('.todo-item');
