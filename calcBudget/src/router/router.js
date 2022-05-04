@@ -16,7 +16,7 @@ class Router extends EventEmitter{
     }
 
     drawPage(view, controller) {
-
+        return 1
     }
 
 
