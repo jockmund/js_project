@@ -17,6 +17,10 @@ class Model extends EventEmitter{
 
     }
 
+    checkEvents() {
+        return this.events.length > 0
+    }
+
     addRecord(amount) {
         const record = new Record(amount)
 
@@ -34,6 +38,10 @@ class Model extends EventEmitter{
 
     get getHistory() {
         return this.history.history
+    }
+
+    getDailyAmount() {
+        return this.dailyAmount.valueOf
     }
 
 }

@@ -7,7 +7,6 @@ class DailyAmount {
     }
 
     get valueOf() {
-        console.log(this.history.spentToday)
         return this.budget.perDay - this.history.spentToday
     }
 }

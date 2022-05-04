@@ -9,7 +9,7 @@ class History {
 
     // Добавление траты в историю
     addRecord(record) {
-        this.records.push(record)
+        this.records.unshift(record)
     }
 
     // Удаление траты из истории

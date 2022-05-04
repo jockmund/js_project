@@ -7,8 +7,10 @@ class ViewHistoryPage extends EventEmitter {
         this.container = document.getElementById('app')
     }
 
+
+
     render(history) {
-        // this.container.removeChild(this.container.lastChild)
+        this.addScroll()
 
         history.forEach(data => {
             const record = this.createRecord(data)
@@ -18,9 +20,16 @@ class ViewHistoryPage extends EventEmitter {
         this.buttonsAddEventListener()
     }
 
+    addScroll() {
+        if (this.container.style.overflow)
+            return
+
+        this.container.style.overflow = 'auto'
+    }
+
     createRecord(record) {
         const labelAmount = createNode('label', { className: 'money' }, record.amount.toString())
-        const labelDate = createNode('label', { className: 'day' }, record.dateTime)
+        const labelDate = createNode('label', { className: 'day' }, record.dateTime.toString())
         const recordInfo = createNode('div', { className: 'record-info'}, labelAmount, labelDate)
 
         const btnDel = createNode('button', { className: 'btn-del' }, 'Удалить')
@@ -53,10 +62,6 @@ class ViewHistoryPage extends EventEmitter {
 
         this.container.removeChild(delRecord)
     }
-
-
-
-
 }
 
 export default ViewHistoryPage

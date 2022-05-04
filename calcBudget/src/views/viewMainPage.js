@@ -7,12 +7,19 @@ class ViewMainPage extends EventEmitter{
         this.container = document.getElementById('app')
         this.render()
 
+        this.removeScroll()
+
         this.buttonsEventListener()
     }
 
-    render() {
-        // this.container.removeChild(this.container.lastChild)
+    removeScroll() {
+        if (!this.container.style.overflow)
+            return
 
+        this.container.style.overflow = null
+    }
+
+    render() {
         const btn7 = createNode('button', { className: 'btn-number' }, '7')
         const btn8 = createNode('button', { className: 'btn-number' }, '8')
         const btn9 = createNode('button', { className: 'btn-number' }, '9')

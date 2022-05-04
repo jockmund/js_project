@@ -41,6 +41,16 @@ function isToday(dateTime) {
         dateTime.getFullYear() === currDay.getFullYear()
 }
 
+function cutURL(url) {
+    // const pattern = /\/.+\//
+    // const pattern = /(\/[^\?#]*(?=.*?\/)\/)/ Можно доделать с целью интереса
+
+    const objURL = new URL(url)
+
+    return objURL.pathname
+
+}
+
 class EventEmitter {
     constructor() {
         this.events = {}
@@ -58,4 +68,4 @@ class EventEmitter {
     }
 }
 
-export {load, save, isToday, createNode, EventEmitter}
+export {load, save, isToday, createNode, EventEmitter, cutURL}
