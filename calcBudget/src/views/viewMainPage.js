@@ -5,6 +5,9 @@ class ViewMainPage extends EventEmitter{
         super()
 
         this.container = document.getElementById('app')
+    }
+
+    renderPage() {
         this.render()
 
         this.removeScroll()

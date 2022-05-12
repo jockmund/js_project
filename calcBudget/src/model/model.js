@@ -2,7 +2,7 @@ import Budget from "./Entities/Budget";
 import DailyAmount from "./Entities/DailyAmount";
 import Record from "./Entities/Record";
 import History from "./Entities/History";
-import {load, EventEmitter} from "./helpers";
+import {load, EventEmitter, save} from "./helpers";
 
 class Model extends EventEmitter{
     constructor(historyData = []) {
@@ -15,6 +15,8 @@ class Model extends EventEmitter{
 
         this.dailyAmount = new DailyAmount(this.budget, this.history)
 
+        this.on('save', save)
+        this.on('load', load)
     }
 
     checkEvents() {

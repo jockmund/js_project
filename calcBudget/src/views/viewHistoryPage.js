@@ -1,4 +1,4 @@
-import {EventEmitter, createNode} from "../model/helpers";
+import {EventEmitter, createNode, dateFormatting} from "../model/helpers";
 
 class ViewHistoryPage extends EventEmitter {
     constructor() {
@@ -7,17 +7,24 @@ class ViewHistoryPage extends EventEmitter {
         this.container = document.getElementById('app')
     }
 
-
-
-    render(history) {
+    renderPage(history) {
         this.addScroll()
 
-        history.forEach(data => {
-            const record = this.createRecord(data)
-            this.container.appendChild(record)
-        })
+        this.render(history)
 
         this.buttonsAddEventListener()
+    }
+
+    render(history) {
+        if (history.length === 0) {
+            const message = createNode('label', {}, 'Трат пока что нет')
+            this.container.appendChild(message)
+        } else {
+            history.forEach(data => {
+                const record = this.createRecord(data)
+                this.container.appendChild(record)
+            })
+        }
     }
 
     addScroll() {
@@ -29,7 +36,7 @@ class ViewHistoryPage extends EventEmitter {
 
     createRecord(record) {
         const labelAmount = createNode('label', { className: 'money' }, record.amount.toString())
-        const labelDate = createNode('label', { className: 'day' }, record.dateTime.toString())
+        const labelDate = createNode('label', { className: 'day' }, dateFormatting(record.dateTime))
         const recordInfo = createNode('div', { className: 'record-info'}, labelAmount, labelDate)
 
         const btnDel = createNode('button', { className: 'btn-del' }, 'Удалить')
@@ -50,11 +57,20 @@ class ViewHistoryPage extends EventEmitter {
                 this.emit('delete', idRecord)
             })
         })
-
     }
 
     findRecordItem(id) {
         return this.container.querySelector(`[data-id="${id}"]`)
+    }
+
+    handleDeleteRecord(idRecord) {
+        this.deleteRecord(idRecord)
+
+        const records = this.container.querySelectorAll('.record')
+        if (records.length === 0) {
+            const message = createNode('label', {}, 'Трат пока что нет')
+            this.container.appendChild(message)
+        }
     }
 
     deleteRecord(idRecord) {
